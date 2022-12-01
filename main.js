@@ -1,63 +1,97 @@
 const boton = document.querySelector('#button').addEventListener('click', inputNumber );
-const titulo =document.querySelector('#pizza');
-const subtitulo =document.querySelector('#precio');
+const nombrePizza =document.querySelector('#pizza');
+const precioPizza =document.querySelector('#precio');
+const container = document.querySelector('#container')
+const imgPizza = document.querySelector('#imagen')
+const errorText = document.querySelector('#small')
+const ingPizza = document.querySelector('#ingredientes')
 
 function inputNumber() {
-    const numberInput = document.querySelector('#input-number').value;
-    const parseInput = parseInt (document.querySelector('#input-number').value);
+    let numberInput = document.querySelector('#input-number').value;
+    let parseInput = parseInt (document.querySelector('#input-number').value);
+
     pizzas.forEach (pizzas => {
      if (parseInput === pizzas.id)
-               {titulo.textContent = pizzas.nombre; 
-               subtitulo.textContent = pizzas.precio;
-               titulo.className='pizza';
-               subtitulo.className = 'precio'
+               {container.style.display = 'flex';
+                nombrePizza.textContent = pizzas.nombre; 
+                imgPizza.style.display = 'block'
+                imgPizza.src = pizzas.imagen;
+                precioPizza.textContent = `$ ${pizzas.precio}`;
+                ingPizza.textContent = pizzas.ingredientes;
+                errorText.textContent ='';
+                localStorage.setItem( 'pizza', JSON.stringify( pizzas));
             }
-     else if (numberInput=== '') 
-               {titulo.textContent = 'Ingrese un número de ID'
-            subtitulo.textContent = ''
-            titulo.className= 'error';
+     else if (numberInput=== '' || NaN) 
+               {container.style.display = 'flex';
+               errorText.textContent = 'Por favor escribe un valor numérico'
+               imgPizza.style.display = 'none';
+               nombrePizza.textContent = '';
+               imgPizza.src = '';
+               precioPizza.textContent = '';
+               ingPizza.textContent = '';
+        
             }
      else if(numberInput > pizzas.id || numberInput <= 0) 
-                {titulo.textContent = 'El número de ID debe estar entre 1 y 6'
-            subtitulo.textContent = ''
-            titulo.className='error';
-            subtitulo.className = ''}
+                {container.style.display = 'flex';
+                errorText.textContent = 'El número de ID debe estar entre 1 y 6'
+                imgPizza.style.display = 'none';
+                nombrePizza.textContent = ''; 
+                imgPizza.src = '';
+                precioPizza.textContent = '';
+                ingPizza.textContent = '';
+                 
+            }
             })
+  }
+  //esto no lo terminé
+
+  function renderLocalStorage() {
+    if (localStorage = !''){
+        let itemLocalStorage = JSON.parse (localStorage.getItem ('pizza'));
+        console.log(itemLocalStorage)
+    }
+    
   }
   // pizzas 
 const pizzas = [ {
     id: 1,
     nombre: 'Muzzarella',
     precio: 500,
-    ingredientes : ['salsa', ' queso muzzarella', ' oregano']
+    ingredientes : ['salsa', ' queso muzzarella', ' oregano'],
+    imagen: './muzarella.png',
 },
 {
     id: 2,
     nombre: 'Napolitana',
     precio: 700,
-    ingredientes : ['salsa', ' muzzarella', ' tomate', ' ajo ']
+    ingredientes : ['salsa', ' muzzarella', ' tomate', ' ajo '],
+    imagen: 'napo.png',
 },
 {
     id: 3,
     nombre: 'Fugazzetta',
     precio: 700,
-    ingredientes : ['salsa', ' muzzarella', ' cebolla']
+    ingredientes : ['salsa', ' muzzarella', ' cebolla'],
+    imagen: 'Fugazzeta.png',
 },
 {
     id: 4,
     nombre: 'Calabresa',
     precio: 800,
-    ingredientes : ['muzarella', ' rodajas de calabresa', ' oregano']
+    ingredientes : ['muzarella', ' rodajas de calabresa', ' oregano'],
+    imagen: 'calabresa.png',
 },
 {
     id: 5,
-    nombre: 'Jamón y morrón',
+    nombre: 'Jamón y palmitos',
     precio: 700,
-    ingredientes : ['salsa', ' muzzarella', ' fetas de jamón', ' morrón']
+    ingredientes : ['salsa', ' muzzarella', ' fetas de jamón', ' palmitos'],
+    imagen: 'jamon.png',
 },
 {
     id: 6,
-    nombre: 'Vegana',
+    nombre: 'Rucula',
     precio: 700,
-    ingredientes : ['tomates fritos', ' queso vegano', ' champignones'] 
+    ingredientes : ['Rucula', ' jamón', ' queso parmesano'],
+    imagen: 'rucula.png',
 }]

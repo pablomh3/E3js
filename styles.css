@@ -1,29 +1,47 @@
 body{
     padding: 70px 50px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
 }
 label{
     background-color: aquamarine;
-    padding: 3px;
+    padding: 3px;  
 }
-.pizza{
-    background-color: red;
+#pizza{
+    color: red;
     padding: 5px;
     width: 300px;
+    
 }
-.precio{
+#precio{
     padding: 7px;
-    background-color: green;
+    color: green;
     width: 200px;
+    font-weight: 600;
 }
-.error{
-    background-color: blue;
-    color: aliceblue;
-    padding: 5px;
-    width: 700px;
+#ingredientes {
+    padding: 7px;
+    color: green;
+    width: 200px;
+    font-weight: 600;
 }
-.container {
-    display: flex;
-    gap: 30px;
+#container {
+    display: none;
+    flex-direction: column;
     text-align: center;
+    border: 2px solid rgb(20, 20, 177);
+    border-radius: 5%;
+    width: 30%;
+    align-items: center;
+    margin-top: 30px;
+
+}
+#imagen {
+    width: 150px;
+    height: 120px;
+}
+#error {
+    color: red;
+    font-weight: 600;
+    font-size: 13px;
 }
