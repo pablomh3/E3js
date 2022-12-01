@@ -9,7 +9,6 @@ const ingPizza = document.querySelector('#ingredientes')
 function inputNumber() {
     let numberInput = document.querySelector('#input-number').value;
     let parseInput = parseInt (document.querySelector('#input-number').value);
-
     pizzas.forEach (pizzas => {
      if (parseInput === pizzas.id)
                {container.style.display = 'flex';
@@ -18,11 +17,11 @@ function inputNumber() {
                 imgPizza.src = pizzas.imagen;
                 precioPizza.textContent = `$ ${pizzas.precio}`;
                 ingPizza.textContent = pizzas.ingredientes;
-                errorText.textContent ='';
+                errorText.textContent = '';
                 localStorage.setItem( 'pizza', JSON.stringify( pizzas));
             }
      else if (numberInput=== '' || NaN) 
-               {container.style.display = 'flex';
+               {container.style.display = 'block';
                errorText.textContent = 'Por favor escribe un valor numérico'
                imgPizza.style.display = 'none';
                nombrePizza.textContent = '';
@@ -32,7 +31,7 @@ function inputNumber() {
         
             }
      else if(numberInput > pizzas.id || numberInput <= 0) 
-                {container.style.display = 'flex';
+                {container.style.display = 'block';
                 errorText.textContent = 'El número de ID debe estar entre 1 y 6'
                 imgPizza.style.display = 'none';
                 nombrePizza.textContent = ''; 
@@ -43,15 +42,21 @@ function inputNumber() {
             }
             })
   }
-  //esto no lo terminé
 
-  function renderLocalStorage() {
+ document.addEventListener('DOMContentLoaded', function (event) {
     if (localStorage = !''){
         let itemLocalStorage = JSON.parse (localStorage.getItem ('pizza'));
-        console.log(itemLocalStorage)
+        console.log(itemLocalStorage.ingredientes);
+        container.style.display = 'flex';
+        ingPizza.textContent = itemLocalStorage.ingredientes;
+        imgPizza.src = itemLocalStorage.imagen;
+        precioPizza.textContent = `$ ${itemLocalStorage.precio}`;
+        nombrePizza.textContent = itemLocalStorage.nombre
+    } else {
+        console.log('No hay nada guardado en LS')
     }
-    
-  }
+ })
+  
   // pizzas 
 const pizzas = [ {
     id: 1,
